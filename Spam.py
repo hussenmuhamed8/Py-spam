@@ -1,6 +1,5 @@
 import telebot
 from requests import request
-import time
 
 # إعدادات البوت
 API_TOKEN = '1737913043:AAFpsmTVhxAqx3QAMqGbC_z-hgKa-Cg1B3k'  # تم استخدام التوكن الذي زودتني به

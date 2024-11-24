@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # فتح المنفذ 5000 للتأكد من استيفاء متطلبات النظام
-EXPOSE 443
+EXPOSE 5000
 
 # تشغيل ملف Python الرئيسي
 CMD ["python", "Spam.py"]

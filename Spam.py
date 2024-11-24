@@ -1,9 +1,14 @@
+from flask import Flask
+from threading import Thread
 import telebot
 from requests import request
 
 # إعدادات البوت
 API_TOKEN = '1737913043:AAFpsmTVhxAqx3QAMqGbC_z-hgKa-Cg1B3k'  # تم استخدام التوكن الذي زودتني به
 bot = telebot.TeleBot(API_TOKEN)
+
+# إعداد خادم الويب باستخدام Flask
+app = Flask(__name__)
 
 # دالة إرسال الرسائل
 def send_messages_asia(phone, count):
@@ -65,7 +70,18 @@ def handle_count(message, phone):
     except ValueError:
         bot.reply_to(message, "الرجاء إدخال عدد صحيح من الرسائل.")
 
-# بدء البوت
-if __name__ == '__main__':
-    print("بوت التليجرام بدأ.")
+# دالة لتشغيل البوت في خيط منفصل
+def run_bot():
     bot.polling()
+
+# تشغيل خادم الويب
+@app.route('/')
+def home():
+    return "Telegram bot is running!"
+
+# بدء التطبيق
+if __name__ == '__main__':
+    # تشغيل البوت في خيط منفصل
+    Thread(target=run_bot).start()
+    # تشغيل خادم الويب على المنفذ 5000
+    app.run(host='0.0.0.0', port=5000)
